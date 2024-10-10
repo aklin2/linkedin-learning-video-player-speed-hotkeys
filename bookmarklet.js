@@ -1,18 +1,31 @@
-javascript:(() => {
+javascript: (() => {
+  if (typeof menu === 'undefined') {
+    var menu = document.getElementsByClassName("vjs-menu-item-checkable");
+  };
 
-if (typeof menu === 'undefined') {
-  var menu = document.getElementsByClassName("vjs-menu-item-checkable");
-};
 
-function handleHotkey(event) {
-  for (let key = 0; key < 7; key++) {
-    if (event.altKey && event.shiftKey && event.code == "Digit" + (key + 1)) {
+  function handleHotkey(event) {
+    if (event.shiftKey && (event.key === ">" || event.key === "<")) {
       event.preventDefault();
-      menu[key].click();
-      break;
+      const minSpeed = 0;
+      const maxSpeed = 6;
+      let videoSpeed;
+
+      for (let key in menu) {
+        if (menu[key].ariaChecked === 'true') {
+          videoSpeed = key;
+          break;
+        };
+      };
+      if (event.key === ">" && videoSpeed < maxSpeed) {
+        videoSpeed++;
+      } else if (event.key === "<" && videoSpeed > minSpeed) {
+        videoSpeed--;
+      }
+      menu[videoSpeed].click();
+      document.getElementsByClassName("vjs-tech")[0].focus();
     }
-  }
-  document.getElementById("ember190_html5_api").focus();
-};
-document.addEventListener('keydown', handleHotkey);
+
+  };
+  document.addEventListener('keydown', handleHotkey);
 })();
