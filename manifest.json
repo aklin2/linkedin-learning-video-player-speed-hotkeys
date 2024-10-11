@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "linkedin learning video player speed hotkeys",
-  "version": "1.1",
+  "version": "1.2",
 
   "description": "Adds key commands to control LinkedIn Learning video playback speed.",
 
